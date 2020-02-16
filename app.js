@@ -7,13 +7,13 @@ new Vue({
     turns: []
   },
   methods: {
-    startGame: function() {
+    startGame() {
       this.gameIsRunning = true;
       this.playerHealth = 100;
       this.monsterHealth = 100;
       this.turns = [];
     },
-    attack: function() {
+    attack() {
       const damage = this.calculateDamage(3, 10)
       this.monsterHealth -= damage;
       this.turns.unshift({
@@ -23,7 +23,7 @@ new Vue({
       if (this.checkWin()) return;
       this.monsterAttacks();
     },
-    specialAttack: function() {
+    specialAttack() {
       const damage = this.calculateDamage(10, 20)
       this.monsterHealth -= damage;
       this.turns.unshift({
@@ -33,7 +33,7 @@ new Vue({
       if (this.checkWin()) return;
       this.monsterAttacks();
     },
-    heal: function() {
+    heal() {
       if (this.playerHealth <= 90) {
         this.playerHealth += 10;
       } else {
@@ -45,10 +45,10 @@ new Vue({
       })
       this.monsterAttacks();
     },
-    giveUp: function() {
+    giveUp() {
       this.gameIsRunning = false;
     },
-    monsterAttacks: function() {
+    monsterAttacks() {
       const damage = this.calculateDamage(5, 12)
       this.playerHealth -= damage;
       this.checkWin();
@@ -57,10 +57,10 @@ new Vue({
         text: 'Monster hits Player for ' + damage + ' points.'
       })
     },
-    calculateDamage: function(min, max) {
+    calculateDamage(min, max) {
       return Math.max(Math.floor(Math.random() * max) + 1, min);
     },
-    checkWin: function() {
+    checkWin() {
       if (this.monsterHealth <= 0) {
         if (confirm('You won! New Game?')){
           this.startGame();
